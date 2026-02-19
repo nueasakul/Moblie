@@ -1,0 +1,409 @@
+/* =========================================
+   1. RESET & GLOBAL STYLES (การตั้งค่าพื้นฐาน)
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background-color: #333; /* สีพื้นหลัง */
+    
+    /* Sticky Footer Setup: ดัน Footer ลงล่างเสมอ */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* ส่วนเนื้อหาจะขยายเต็มพื้นที่ว่าง */
+}
+
+/* --- Layout Utilities --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* คลาสสำหรับหน้า Home (Demo) */
+.home-demo {
+    height: 2000px;      /* ความสูงหลอกๆ เพื่อให้มีพื้นที่เลื่อน */
+    padding-top: 150px;  /* ดันเนื้อหาลงมา ไม่ให้โดน Header บัง */
+    text-align: center;  /* จัดข้อความกึ่งกลาง */
+}
+
+
+/* =========================================
+   2. HEADER & NAVIGATION (ส่วนหัวและเมนู)
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F9A848;
+    padding: 10px 40px;
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    /* Fixed Position */
+    position: fixed;
+    top: 0; 
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.3s ease-in-out;
+}
+
+.logo img {
+    height: 50px;
+    object-fit: contain;
+}
+
+/* --- Menu List --- */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2px;
+    position: relative;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 20px 10px;
+    border-radius: 8px;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #fff;
+    background-color: rgba(255, 123, 0, 0.658);
+}
+
+.arrow {
+    font-size: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+
+/* =========================================
+   3. DROPDOWN MENU (เมนูย่อย)
+   ========================================= */
+.dropdown { 
+    position: relative; 
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* ให้ติดขอบล่างปุ่มแม่พอดี */
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    min-width: 250px;
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu { 
+    display: block; 
+}
+
+.dropdown-menu li a {
+    color: #333;
+    padding: 10px 20px;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1;
+    color: #F9A848;
+}
+
+/* Dropdown ชิดขวา */
+.dropdown-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+/* สะพานล่องหนกันเมนูหายตอนเลื่อนเมาส์ */
+.dropdown-menu::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    top: -20px;
+    left: 0;
+    background-color: transparent;
+}
+
+
+/* =========================================
+   4. FOOTER (ส่วนท้ายเว็บ)
+   ========================================= */
+footer {
+    background-color: #F9A848;
+    padding: 20px 0; /* Compact size */
+    color: #000;
+    margin-top: auto; 
+    font-size: 14px;
+}
+
+/* --- Footer Top (Logo & Social) --- */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.footer-logo img {
+    height: 35px;
+    object-fit: contain;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 16px;
+    margin-left: 10px;
+    width: 30px; 
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+}
+.social-icons a:nth-child(1) { background-color: #1877F2; }
+.social-icons a:nth-child(2) { background-color: #E4405F; }
+
+/* --- Footer Divider --- */
+.footer-line {
+    border: none;
+    border-top: 1px solid #333;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+/* --- Footer Bottom (Content) --- */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-col { flex: 1; }
+
+.footer-col h3 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.footer-col p {
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 5px;
+}
+
+/* --- Contact Info --- */
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.contact-item i {
+    width: 20px;
+    font-size: 14px;
+    margin-top: 3px; 
+}
+
+
+/* =========================================
+   5. RESPONSIVE & MOBILE (ส่วนแสดงผลมือถือ)
+   ========================================= */
+
+/* --- ปุ่ม Hamburger (ซ่อนใน Desktop) --- */
+.menu-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-icon span {
+    width: 25px; 
+    height: 3px; 
+    background-color: #000;
+    transition: 0.3s;
+}
+
+/* --- Footer Responsive (Tablet/Mobile) --- */
+@media (max-width: 768px) {
+    .footer-bottom, .footer-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .footer-line { margin: 15px 0; }
+    .social-icons { margin-top: 10px; }
+    .contact-item { justify-content: center; }
+}
+
+/* --- Navbar Responsive (Mobile Menu) --- */
+@media screen and (max-width: 950px) {
+    /* แสดงปุ่ม Hamburger */
+    .menu-icon { 
+        display: flex; 
+    }
+
+    /* ซ่อนเมนูหลัก และปรับให้เป็น Popup */
+    #menu-container {
+        display: none; 
+        position: absolute;
+        top: 60px; /* ความสูงเท่า Navbar ใหม่ */
+        left: 0; 
+        width: 100%;
+        background-color: #F9A848; 
+        padding-bottom: 20px;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+        flex-direction: column;
+    }
+
+    /* แสดงเมนูเมื่อมี Class .show */
+    #menu-container.show { 
+        display: block; 
+    }
+
+    /* จัดเรียงลิงก์เป็นแนวตั้ง */
+    .nav-links {
+        flex-direction: column;
+        gap: 0; 
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* ปรับ Dropdown ในมือถือ */
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: #F9A848;
+        display: none;
+        padding: 0;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    
+    .dropdown-menu::before { display: none; }
+}
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto 40px auto;
+    overflow: hidden; /* ซ่อนรูปที่ไม่เกี่ยวข้อง */
+    /* border-radius: 15px; */
+    margin: 0%;
+    padding: 25px;
+}
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide-item {
+    min-width: 100%;
+    display: grid; /* ใช้ Grid แทน Flex เพื่อล็อคคอลัมน์ */
+    grid-template-columns: 1fr 1.5fr; /* ฝั่งรูป 1 ส่วน, ฝั่งข้อความ 1.5 ส่วน */
+    align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้งพร้อมกัน */
+    padding: 40px 80px; /* เพิ่ม padding ซ้ายขวาให้ห่างจากปุ่มลูกศร */
+    gap: 40px; /* ระยะห่างระหว่างรูปกับข้อความที่คงที่ */
+    box-sizing: border-box;
+}
+
+/* ล็อคขนาดรูปภาพ */
+.slide-item img {
+    width: 100%;       /* กว้างเต็มคอลัมน์ที่ Grid แบ่งให้ */
+    height: 320px;     /* บังคับความสูงเท่ากันทุกรูป */
+    object-fit: cover; /* ตัดรูปให้พอดีกรอบ ไม่ให้รูปเบี้ยว */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ล็อคตำแหน่งข้อความ */
+.slide-content {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slide-content h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: white;
+    /* ถ้าชื่อยาวเกินไป ให้ขึ้นบรรทัดใหม่แต่ไม่ดัน Layout */
+    min-height: 2.4em; 
+}
+
+/* ปุ่มกด */
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 50px;  /* 1. กำหนดความกว้างที่แน่นอน */
+    height: 50px; /* 1. กำหนดความสูงให้เท่ากับความกว้าง */
+    /* padding: 15px; เอาบรรทัดนี้ออก */
+
+    display: flex;           /* 3. ใช้ Flexbox */
+    justify-content: center; /* 3. จัดกึ่งกลางแนวนอน */
+    align-items: center;     /* 3. จัดกึ่งกลางแนวตั้ง */
+
+    background: rgba(0, 0, 0, 0.5); /* ปรับสีพื้นหลังให้เข้มขึ้นนิดนึงเพื่อให้เห็นชัด (ตามรูป) */
+    border: none;
+    color: white;
+    font-size: 24px; /* เพิ่มขนาดไอคอนให้สมดุลกับปุ่ม */
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%; /* 2. เมื่อกว้าง=สูง อันนี้จะทำให้เป็นวงกลมเป๊ะ */
+    transition: 0.3s;
+}
+
+/* ส่วนอื่นๆ เหมือนเดิมครับ */
+.prev-btn:hover, .next-btn:hover {
+    background: rgba(255, 170, 66, 0.8);
+}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+@media (max-width: 768px) {
+    .slide-item {
+        grid-template-columns: 1fr; /* เปลี่ยนเป็นคอลัมน์เดียว */
+        text-align: center;
+        padding: 40px 20px; /* ลด Padding ลง */
+    }
+    .slide-content {
+        align-items: center; /* จัดข้อความให้อยู่ตรงกลาง */
+    }
+}
